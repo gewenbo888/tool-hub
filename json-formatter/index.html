@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JSON Formatter & Validator — Free Online Tool | JSON 格式化校验器</title>
+<meta name="description" content="Free online JSON formatter, validator, and minifier. Format ugly JSON instantly, validate syntax with line-precise error messages, minify for production. Runs entirely in your browser.">
+<meta name="keywords" content="json formatter, json validator, json minifier, json beautifier, format json online, json prettifier, online json tool">
+<meta name="author" content="Gewenbo">
+<link rel="canonical" href="https://tools.psyverse.fun/json-formatter">
+<link rel="alternate" hreflang="en" href="https://tools.psyverse.fun/json-formatter">
+<link rel="alternate" hreflang="zh-CN" href="https://tools.psyverse.fun/json-formatter">
+<meta property="og:title" content="JSON Formatter & Validator — Free, Instant, Browser-side">
+<meta property="og:description" content="Format, validate, and minify JSON instantly. Errors with line numbers. No upload.">
+<meta property="og:url" content="https://tools.psyverse.fun/json-formatter">
+<meta property="og:site_name" content="Tool Hub · 工具集">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="JSON Formatter & Validator — Free Online Tool">
+<meta name="twitter:description" content="Format, validate, and minify JSON instantly with line-precise errors.">
+<meta name="theme-color" content="#0a0a0b">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"JSON Formatter","applicationCategory":"DeveloperApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0"},"url":"https://tools.psyverse.fun/json-formatter"}</script>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%23c5f432'/><text x='50%25' y='52%25' font-family='monospace' font-size='15' font-weight='700' text-anchor='middle' dominant-baseline='central' fill='%230a0a0b'>{}</text></svg>">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/shared.css">
+<script src="https://analytics-dashboard-two-blue.vercel.app/tracker.js" defer></script>
+</head>
+<body data-lang="en">
+
+<header class="site-header">
+  <div class="header-inner">
+    <a href="/" class="logo"><div class="logo-mark">{}</div><span data-en="Tool Hub" data-zh="工具集"></span></a>
+    <div class="nav-spacer"></div>
+    <div class="header-controls">
+      <button class="icon-btn" data-action="random-tool" title="Random tool"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 3h5v5M4 20 21 3M21 16v5h-5M15 15l6 6M4 4l5 5"/></svg></button>
+      <button class="icon-btn lang-btn" data-action="toggle-lang">中文</button>
+      <button class="icon-btn" data-action="toggle-theme"></button>
+    </div>
+  </div>
+</header>
+
+<main class="tool-page">
+  <div class="breadcrumb"><a href="/">/ Tool Hub</a> / json-formatter</div>
+
+  <div class="tool-header">
+    <h1 data-en="JSON Formatter & Validator" data-zh="JSON 格式化与校验"></h1>
+    <p class="desc" data-en="Paste JSON to instantly format, validate, or minify it. Errors come with line numbers. Nothing is uploaded — everything runs in your browser." data-zh="粘贴 JSON 即可立即格式化、校验或压缩。错误信息包含行号。所有操作均在浏览器本地完成，不会上传任何数据。"></p>
+    <div class="tool-actions">
+      <button class="action-btn primary" id="btn-format"><span data-en="Format" data-zh="格式化"></span></button>
+      <button class="action-btn" id="btn-minify"><span data-en="Minify" data-zh="压缩"></span></button>
+      <button class="action-btn" id="btn-validate"><span data-en="Validate" data-zh="校验"></span></button>
+      <button class="action-btn" id="btn-sample"><span data-en="Sample" data-zh="示例"></span></button>
+      <button class="action-btn" id="btn-clear"><span data-en="Clear" data-zh="清空"></span></button>
+      <button class="action-btn" data-action="open-share"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.59 13.51 6.83 3.98M15.41 6.51l-6.82 3.98"/></svg><span data-en="Share" data-zh="分享"></span></button>
+    </div>
+  </div>
+
+  <div class="workspace">
+    <div class="panel">
+      <div class="panel-head">
+        <span class="label" data-en="Input" data-zh="输入"></span>
+        <div class="actions">
+          <button class="mini-btn" id="btn-paste"><span data-en="Paste" data-zh="粘贴"></span></button>
+        </div>
+      </div>
+      <div class="panel-body" style="padding:0;">
+        <textarea id="input" class="code" placeholder='{"hello":"world"}' style="padding:14px 16px;"></textarea>
+      </div>
+    </div>
+    <div class="panel">
+      <div class="panel-head">
+        <span class="label" data-en="Output" data-zh="输出"></span>
+        <span id="status" style="font-family:var(--mono);font-size:.78rem;color:var(--text-dim);"></span>
+        <div class="actions">
+          <button class="mini-btn" data-copy="target" data-target="#output"><span data-en="Copy" data-zh="复制"></span></button>
+          <button class="mini-btn" id="btn-download"><span data-en="Download" data-zh="下载"></span></button>
+        </div>
+      </div>
+      <div class="panel-body" style="padding:0;">
+        <pre id="output" class="output-pre" style="padding:14px 16px;"></pre>
+      </div>
+    </div>
+  </div>
+
+  <section class="seo-section">
+    <h2 data-en="What is a JSON Formatter?" data-zh="什么是 JSON 格式化工具？"></h2>
+    <p data-en="A JSON formatter takes raw, unformatted JSON text and rewrites it with consistent indentation, line breaks, and spacing — making it human-readable. It also validates that the input is syntactically correct JSON, surfacing any errors with their line position." data-zh="JSON 格式化工具会将未格式化的 JSON 文本重写为带一致缩进、换行和空格的版本，让人易读。同时会校验语法正确性，如有错误则定位到具体行号。"></p>
+
+    <h3 data-en="How to use" data-zh="使用方法"></h3>
+    <ul>
+      <li data-en="Paste your JSON into the left panel" data-zh="将 JSON 粘贴到左侧面板"></li>
+      <li data-en="Click Format for indented output, Minify for one-line, Validate to check syntax" data-zh="点击「格式化」生成缩进版，「压缩」生成单行版，「校验」检查语法"></li>
+      <li data-en="Click Copy to copy the result" data-zh="点击「复制」复制结果"></li>
+      <li data-en="Click Share to send a colleague a pre-filled link" data-zh="点击「分享」发送预填好的链接给同事"></li>
+    </ul>
+
+    <h3 data-en="Examples" data-zh="示例"></h3>
+    <p data-en="Input:" data-zh="输入："></p>
+    <p><code>{"name":"Tool Hub","tools":9,"free":true}</code></p>
+    <p data-en="Formatted output:" data-zh="格式化输出："></p>
+    <p style="white-space:pre;font-family:var(--mono);background:var(--surface-2);padding:12px;border-radius:6px;font-size:.85rem;">{
+  "name": "Tool Hub",
+  "tools": 9,
+  "free": true
+}</p>
+
+    <h3 data-en="Embed this tool" data-zh="嵌入此工具"></h3>
+    <p data-en="Drop this iframe into your blog, docs, or wiki:" data-zh="将此 iframe 代码加入你的博客、文档或 wiki："></p>
+    <div class="embed-block" id="embed">
+      &lt;iframe src="https://tools.psyverse.fun/json-formatter" width="100%" height="600" frameborder="0"&gt;&lt;/iframe&gt;
+      <button class="copy-mini" data-copy='<iframe src="https://tools.psyverse.fun/json-formatter" width="100%" height="600" frameborder="0"></iframe>'><span data-en="Copy" data-zh="复制"></span></button>
+    </div>
+
+    <h2 data-en="FAQ" data-zh="常见问题"></h2>
+    <div class="faq-item"><div class="faq-q" data-en="Is my JSON sent to a server?" data-zh="JSON 数据会上传服务器吗？"></div><div class="faq-a" data-en="No. JavaScript parses and reformats it entirely in your browser. The data never leaves your device." data-zh="不会。JavaScript 全部在浏览器本地解析和格式化，数据不会离开你的设备。"></div></div>
+    <div class="faq-item"><div class="faq-q" data-en="What's the difference between minify and format?" data-zh="压缩和格式化有什么区别？"></div><div class="faq-a" data-en="Minify strips all whitespace to produce the smallest valid JSON (best for transport). Format adds indentation and line breaks for readability." data-zh="压缩会去除所有空白以得到最小的合法 JSON（适合传输）；格式化则添加缩进和换行以便阅读。"></div></div>
+    <div class="faq-item"><div class="faq-q" data-en="Why does my JSON say invalid?" data-zh="为什么提示我的 JSON 不合法？"></div><div class="faq-a" data-en="Common causes: trailing commas, unquoted keys, single quotes instead of double quotes, or missing closing brackets. Check the error line." data-zh="常见原因：多余逗号、键未加引号、使用单引号而非双引号、缺少闭合括号。请查看错误行号。"></div></div>
+    <div class="faq-item"><div class="faq-q" data-en="What's the maximum size?" data-zh="最大支持多大？"></div><div class="faq-a" data-en="The browser is the limit — typically megabytes work fine. Multi-megabyte JSON may slow rendering but parsing usually succeeds." data-zh="取决于浏览器 — 一般几 MB 内运行流畅。超大 JSON 可能渲染较慢，但解析通常正常。"></div></div>
+  </section>
+</main>
+
+<div class="modal-bg" id="share-modal" data-action="close-modal">
+  <div class="modal" onclick="event.stopPropagation()">
+    <h3 data-en="Share this link" data-zh="分享链接"></h3>
+    <div class="modal-link"></div>
+    <div class="modal-share-row">
+      <a class="action-btn" target="_blank" data-share-x>X / Twitter</a>
+      <a class="action-btn" target="_blank" data-share-fb>Facebook</a>
+      <a class="action-btn" target="_blank" data-share-li>LinkedIn</a>
+      <button class="action-btn primary" data-share-copy data-copy="target"><span data-en="Copy link" data-zh="复制链接"></span></button>
+    </div>
+  </div>
+</div>
+
+<script src="/shared.js"></script>
+<script>
+const $ = s => document.querySelector(s);
+const input = $('#input'), output = $('#output'), status = $('#status');
+
+function setStatus(text, color) {
+  status.textContent = text;
+  status.style.color = color || 'var(--text-dim)';
+}
+
+function format() {
+  const t = input.value.trim();
+  if (!t) { output.textContent = ''; setStatus(''); return; }
+  try {
+    const obj = JSON.parse(t);
+    output.textContent = JSON.stringify(obj, null, 2);
+    setStatus('✓ Valid · ' + new Blob([JSON.stringify(obj)]).size + ' B', 'var(--good)');
+    TH.saveInput('json-formatter', t);
+  } catch (e) {
+    const m = e.message.match(/position (\d+)/);
+    let lineInfo = '';
+    if (m) {
+      const lines = t.slice(0, +m[1]).split('\n');
+      lineInfo = ` (line ${lines.length}, col ${lines.pop().length + 1})`;
+    }
+    output.textContent = '✗ ' + e.message + lineInfo;
+    setStatus('✗ Invalid', 'var(--danger)');
+  }
+}
+
+function minify() {
+  const t = input.value.trim();
+  if (!t) return;
+  try {
+    output.textContent = JSON.stringify(JSON.parse(t));
+    setStatus('✓ Minified · ' + new Blob([output.textContent]).size + ' B', 'var(--good)');
+  } catch (e) {
+    output.textContent = '✗ ' + e.message;
+    setStatus('✗ Invalid', 'var(--danger)');
+  }
+}
+
+$('#btn-format').onclick = format;
+$('#btn-minify').onclick = minify;
+$('#btn-validate').onclick = format;
+$('#btn-sample').onclick = () => { input.value = '{"name":"Tool Hub","tools":9,"free":true,"features":["fast","private","embeddable"],"meta":{"version":"1.0","author":"Gewenbo"}}'; format(); };
+$('#btn-clear').onclick = () => { input.value = ''; output.textContent = ''; setStatus(''); };
+$('#btn-paste').onclick = async () => { try { input.value = await navigator.clipboard.readText(); format(); } catch {} };
+$('#btn-download').onclick = () => {
+  if (!output.textContent) return;
+  const blob = new Blob([output.textContent], { type: 'application/json' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob); a.download = 'output.json'; a.click();
+};
+
+input.addEventListener('input', () => {
+  if (input.value.trim()) format();
+});
+
+// Restore from share state or localStorage
+const state = TH.parseStateFromHash();
+if (state && state.text) { input.value = state.text; format(); }
+else { const saved = TH.loadInput('json-formatter'); if (saved) { input.value = saved; format(); } }
+
+// Override share button to encode current state
+document.querySelector('[data-action="open-share"]').addEventListener('click', e => {
+  e.target.closest('[data-action]').dataset.url = TH.shareableURL({ text: input.value });
+});
+</script>
+</body>
+</html>

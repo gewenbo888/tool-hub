@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unit Converter — Length, Weight, Temperature | 在线单位换算</title>
+<meta name="description" content="Free online unit converter for length, weight, temperature, area, and volume. Instant conversion across all common units. No signup.">
+<meta name="keywords" content="unit converter, length converter, weight converter, temperature converter, online conversion, metric to imperial">
+<link rel="canonical" href="https://tools.psyverse.fun/unit-converter">
+<link rel="alternate" hreflang="en" href="https://tools.psyverse.fun/unit-converter">
+<link rel="alternate" hreflang="zh-CN" href="https://tools.psyverse.fun/unit-converter">
+<meta property="og:title" content="Unit Converter — Length, Weight, Temperature, Area, Volume">
+<meta property="og:description" content="Convert between metric and imperial units instantly.">
+<meta property="og:url" content="https://tools.psyverse.fun/unit-converter">
+<meta property="og:site_name" content="Tool Hub · 工具集">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Unit Converter — Free Online Tool">
+<meta name="twitter:description" content="Convert length, weight, temp, area, volume across all common units.">
+<meta name="theme-color" content="#0a0a0b">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Unit Converter","applicationCategory":"UtilityApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0"},"url":"https://tools.psyverse.fun/unit-converter"}</script>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%23c5f432'/><text x='50%25' y='52%25' font-family='monospace' font-size='15' font-weight='700' text-anchor='middle' dominant-baseline='central' fill='%230a0a0b'>{}</text></svg>">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/shared.css">
+<script src="https://analytics-dashboard-two-blue.vercel.app/tracker.js" defer></script>
+</head>
+<body data-lang="en">
+
+<header class="site-header">
+  <div class="header-inner">
+    <a href="/" class="logo"><div class="logo-mark">{}</div><span data-en="Tool Hub" data-zh="工具集"></span></a>
+    <div class="nav-spacer"></div>
+    <div class="header-controls">
+      <button class="icon-btn" data-action="random-tool"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 3h5v5M4 20 21 3M21 16v5h-5M15 15l6 6M4 4l5 5"/></svg></button>
+      <button class="icon-btn lang-btn" data-action="toggle-lang">中文</button>
+      <button class="icon-btn" data-action="toggle-theme"></button>
+    </div>
+  </div>
+</header>
+
+<main class="tool-page" style="max-width:760px;">
+  <div class="breadcrumb"><a href="/">/ Tool Hub</a> / unit-converter</div>
+
+  <div class="tool-header">
+    <h1 data-en="Unit Converter" data-zh="单位换算"></h1>
+    <p class="desc" data-en="Convert length, weight, temperature, area, and volume between metric and imperial units. Instant, accurate, browser-based." data-zh="在公制与英制之间换算长度、重量、温度、面积、体积。即时、精确、本地运行。"></p>
+  </div>
+
+  <div class="conv-tabs" id="tabs">
+    <button class="conv-tab active" data-cat="length"><span data-en="Length" data-zh="长度"></span></button>
+    <button class="conv-tab" data-cat="weight"><span data-en="Weight" data-zh="重量"></span></button>
+    <button class="conv-tab" data-cat="temp"><span data-en="Temperature" data-zh="温度"></span></button>
+    <button class="conv-tab" data-cat="area"><span data-en="Area" data-zh="面积"></span></button>
+    <button class="conv-tab" data-cat="volume"><span data-en="Volume" data-zh="体积"></span></button>
+  </div>
+
+  <div class="conv-row">
+    <div class="field">
+      <label data-en="From" data-zh="从"></label>
+      <input type="number" id="from-val" value="1" step="any">
+      <select id="from-unit" class="std" style="margin-top:6px;"></select>
+    </div>
+    <button class="conv-arrow" id="swap" title="Swap">⇄</button>
+    <div class="field">
+      <label data-en="To" data-zh="到"></label>
+      <input type="number" id="to-val" value="" step="any">
+      <select id="to-unit" class="std" style="margin-top:6px;"></select>
+    </div>
+  </div>
+
+  <div class="tool-actions">
+    <button class="action-btn" data-copy="target" data-target="#to-val"><span data-en="Copy result" data-zh="复制结果"></span></button>
+    <button class="action-btn" data-action="open-share"><span data-en="Share" data-zh="分享"></span></button>
+  </div>
+
+  <div style="margin-top:24px;padding:18px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);">
+    <div style="font-family:var(--mono);font-size:.78rem;color:var(--text-faint);text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px;" data-en="Quick reference" data-zh="快速参考"></div>
+    <div id="ref" style="font-family:var(--mono);font-size:.85rem;color:var(--text-dim);line-height:1.8;"></div>
+  </div>
+
+  <section class="seo-section">
+    <h2 data-en="About this converter" data-zh="关于此换算器"></h2>
+    <p data-en="Convert between metric (SI) and imperial units across the most-needed categories. All conversions are computed locally in your browser to standard precision." data-zh="本工具支持公制（SI）与英制单位之间的常用换算。所有计算均在浏览器本地完成，达到标准精度。"></p>
+
+    <h3 data-en="Categories supported" data-zh="支持类别"></h3>
+    <ul>
+      <li data-en="Length: m, km, cm, mm, in, ft, yd, mi" data-zh="长度：米、千米、厘米、毫米、英寸、英尺、码、英里"></li>
+      <li data-en="Weight: kg, g, mg, lb, oz, ton, t (metric)" data-zh="重量：千克、克、毫克、磅、盎司、吨"></li>
+      <li data-en="Temperature: °C, °F, K" data-zh="温度：摄氏度、华氏度、开尔文"></li>
+      <li data-en="Area: m², km², ha, acre, ft², in²" data-zh="面积：平方米、平方千米、公顷、英亩、平方英尺"></li>
+      <li data-en="Volume: L, mL, m³, gal, qt, pt, fl oz" data-zh="体积：升、毫升、立方米、加仑、夸脱、品脱、液量盎司"></li>
+    </ul>
+
+    <h3 data-en="Embed this tool" data-zh="嵌入此工具"></h3>
+    <div class="embed-block">
+      &lt;iframe src="https://tools.psyverse.fun/unit-converter" width="100%" height="700" frameborder="0"&gt;&lt;/iframe&gt;
+      <button class="copy-mini" data-copy='<iframe src="https://tools.psyverse.fun/unit-converter" width="100%" height="700" frameborder="0"></iframe>'><span data-en="Copy" data-zh="复制"></span></button>
+    </div>
+
+    <h2 data-en="FAQ" data-zh="常见问题"></h2>
+    <div class="faq-item"><div class="faq-q" data-en="How accurate are conversions?" data-zh="换算精度如何？"></div><div class="faq-a" data-en="We use the standard SI definitions (e.g. 1 inch = 25.4 mm exactly). Output precision is JS double float (~15 digits)." data-zh="使用标准 SI 定义（如 1 英寸 = 25.4 毫米精确值）。输出精度为 JS 双精度浮点（约 15 位）。"></div></div>
+    <div class="faq-item"><div class="faq-q" data-en="US vs UK gallons?" data-zh="美制还是英制加仑？"></div><div class="faq-a" data-en="We use US gallons (≈ 3.785 L). UK Imperial gallons are different (≈ 4.546 L) — convert via mL if you need precision." data-zh="本工具使用美制加仑（≈ 3.785 升）。英制加仑不同（≈ 4.546 升），如需精确可经毫升中转。"></div></div>
+  </section>
+</main>
+
+<div class="modal-bg" id="share-modal" data-action="close-modal">
+  <div class="modal" onclick="event.stopPropagation()">
+    <h3 data-en="Share this conversion" data-zh="分享此换算"></h3>
+    <div class="modal-link"></div>
+    <div class="modal-share-row">
+      <a class="action-btn" target="_blank" data-share-x>X / Twitter</a>
+      <a class="action-btn" target="_blank" data-share-fb>Facebook</a>
+      <a class="action-btn" target="_blank" data-share-li>LinkedIn</a>
+      <button class="action-btn primary" data-share-copy data-copy="target"><span data-en="Copy link" data-zh="复制链接"></span></button>
+    </div>
+  </div>
+</div>
+
+<script src="/shared.js"></script>
+<script>
+const $ = s => document.querySelector(s);
+const fromVal = $('#from-val'), toVal = $('#to-val'), fromUnit = $('#from-unit'), toUnit = $('#to-unit');
+
+const UNITS = {
+  length: { m: 1, km: 1000, cm: 0.01, mm: 0.001, in: 0.0254, ft: 0.3048, yd: 0.9144, mi: 1609.344 },
+  weight: { kg: 1, g: 0.001, mg: 0.000001, lb: 0.45359237, oz: 0.0283495, ton: 1000, 'st (stone)': 6.35029 },
+  area:   { 'm²': 1, 'km²': 1000000, 'ha': 10000, 'ft²': 0.092903, 'in²': 0.000645, acre: 4046.86, 'yd²': 0.836127 },
+  volume: { L: 1, mL: 0.001, 'm³': 1000, 'gal (US)': 3.78541, 'qt (US)': 0.946353, 'pt (US)': 0.473176, 'fl oz (US)': 0.0295735, cup: 0.236588 },
+  temp:   { '°C': 1, '°F': 2, 'K': 3 }
+};
+
+let cat = 'length';
+
+function fillUnits() {
+  const opts = Object.keys(UNITS[cat]).map(u => `<option value="${u}">${u}</option>`).join('');
+  fromUnit.innerHTML = opts; toUnit.innerHTML = opts;
+  if (cat === 'length') { fromUnit.value = 'm'; toUnit.value = 'ft'; }
+  else if (cat === 'weight') { fromUnit.value = 'kg'; toUnit.value = 'lb'; }
+  else if (cat === 'temp') { fromUnit.value = '°C'; toUnit.value = '°F'; }
+  else if (cat === 'area') { fromUnit.value = 'm²'; toUnit.value = 'ft²'; }
+  else if (cat === 'volume') { fromUnit.value = 'L'; toUnit.value = 'gal (US)'; }
+}
+
+function convert() {
+  const v = parseFloat(fromVal.value);
+  if (isNaN(v)) { toVal.value = ''; return; }
+  if (cat === 'temp') { toVal.value = format(tempConvert(v, fromUnit.value, toUnit.value)); }
+  else {
+    const base = v * UNITS[cat][fromUnit.value];
+    toVal.value = format(base / UNITS[cat][toUnit.value]);
+  }
+  renderRef();
+}
+
+function tempConvert(v, f, t) {
+  let k = v;
+  if (f === '°C') k = v + 273.15;
+  if (f === '°F') k = (v - 32) * 5/9 + 273.15;
+  if (t === 'K') return k;
+  if (t === '°C') return k - 273.15;
+  if (t === '°F') return (k - 273.15) * 9/5 + 32;
+}
+
+function format(n) {
+  if (Math.abs(n) > 1e9 || (Math.abs(n) < 1e-4 && n !== 0)) return n.toExponential(4);
+  return parseFloat(n.toPrecision(8)).toString();
+}
+
+function renderRef() {
+  const ref = $('#ref');
+  const refMap = {
+    length: ['1 m = 3.281 ft', '1 km = 0.621 mi', '1 in = 2.54 cm', '1 mi = 1.609 km'],
+    weight: ['1 kg = 2.205 lb', '1 lb = 0.454 kg', '1 oz = 28.35 g', '1 ton = 1000 kg'],
+    temp:   ['0 °C = 32 °F', '100 °C = 212 °F', '0 K = -273.15 °C', '−40 °C = −40 °F'],
+    area:   ['1 m² = 10.764 ft²', '1 ha = 2.471 acre', '1 km² = 100 ha', '1 acre = 4046.86 m²'],
+    volume: ['1 L = 0.264 gal (US)', '1 gal (US) = 3.785 L', '1 cup = 236.6 mL', '1 m³ = 1000 L']
+  };
+  ref.innerHTML = refMap[cat].map(s => `<div>${s}</div>`).join('');
+}
+
+document.querySelectorAll('[data-cat]').forEach(b => b.onclick = () => {
+  document.querySelectorAll('[data-cat]').forEach(x => x.classList.remove('active'));
+  b.classList.add('active'); cat = b.dataset.cat; fillUnits(); convert();
+});
+
+[fromVal, fromUnit, toUnit].forEach(el => el.addEventListener('input', convert));
+$('#swap').onclick = () => { const a = fromUnit.value; fromUnit.value = toUnit.value; toUnit.value = a; convert(); };
+
+fillUnits(); convert();
+
+document.querySelector('[data-action="open-share"]').addEventListener('click', e => {
+  e.target.closest('[data-action]').dataset.url = window.location.href;
+});
+</script>
+</body>
+</html>

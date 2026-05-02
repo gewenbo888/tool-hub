@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>QR Code Generator — Free PNG & SVG | 二维码生成器</title>
+<meta name="description" content="Generate free QR codes for URLs, text, and contact info. Customize colors, export as PNG or SVG, no watermark required. Runs in your browser.">
+<meta name="keywords" content="qr code generator, free qr code, qr code maker, qr code svg, qr code png, custom qr code">
+<link rel="canonical" href="https://tools.psyverse.fun/qr-code-generator">
+<link rel="alternate" hreflang="en" href="https://tools.psyverse.fun/qr-code-generator">
+<link rel="alternate" hreflang="zh-CN" href="https://tools.psyverse.fun/qr-code-generator">
+<meta property="og:title" content="QR Code Generator — Free PNG & SVG, Custom Colors">
+<meta property="og:description" content="Generate QR codes for any URL or text. Customize colors, export PNG/SVG, no signup.">
+<meta property="og:url" content="https://tools.psyverse.fun/qr-code-generator">
+<meta property="og:site_name" content="Tool Hub · 工具集">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="QR Code Generator — Free Online">
+<meta name="twitter:description" content="Generate QR codes with custom colors, PNG/SVG export, watermark optional.">
+<meta name="theme-color" content="#0a0a0b">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"QR Code Generator","applicationCategory":"UtilityApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0"},"url":"https://tools.psyverse.fun/qr-code-generator"}</script>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%23c5f432'/><text x='50%25' y='52%25' font-family='monospace' font-size='15' font-weight='700' text-anchor='middle' dominant-baseline='central' fill='%230a0a0b'>{}</text></svg>">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/shared.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script src="https://analytics-dashboard-two-blue.vercel.app/tracker.js" defer></script>
+</head>
+<body data-lang="en">
+
+<header class="site-header">
+  <div class="header-inner">
+    <a href="/" class="logo"><div class="logo-mark">{}</div><span data-en="Tool Hub" data-zh="工具集"></span></a>
+    <div class="nav-spacer"></div>
+    <div class="header-controls">
+      <button class="icon-btn" data-action="random-tool"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 3h5v5M4 20 21 3M21 16v5h-5M15 15l6 6M4 4l5 5"/></svg></button>
+      <button class="icon-btn lang-btn" data-action="toggle-lang">中文</button>
+      <button class="icon-btn" data-action="toggle-theme"></button>
+    </div>
+  </div>
+</header>
+
+<main class="tool-page">
+  <div class="breadcrumb"><a href="/">/ Tool Hub</a> / qr-code-generator</div>
+
+  <div class="tool-header">
+    <h1 data-en="QR Code Generator" data-zh="二维码生成器"></h1>
+    <p class="desc" data-en="Generate QR codes for URLs, text, contact details, or WiFi credentials. Customize colors, export as PNG or SVG. Built-in watermark is optional and off by default." data-zh="为网址、文本、联系信息或 WiFi 凭据生成二维码。可自定义颜色，导出 PNG 或 SVG。内置水印可选，默认关闭。"></p>
+  </div>
+
+  <div class="workspace">
+    <div class="panel">
+      <div class="panel-head"><span class="label" data-en="Content & options" data-zh="内容与选项"></span></div>
+      <div class="panel-body">
+        <div class="field">
+          <label data-en="Content (URL or text)" data-zh="内容（网址或文本）"></label>
+          <textarea id="content" class="std" rows="3" placeholder="https://tools.psyverse.fun">https://tools.psyverse.fun</textarea>
+        </div>
+        <div class="row">
+          <div class="field">
+            <label data-en="Foreground" data-zh="前景色"></label>
+            <input id="fg" type="color" value="#0a0a0b" style="height:40px;padding:2px;border-radius:6px;width:100%;">
+          </div>
+          <div class="field">
+            <label data-en="Background" data-zh="背景色"></label>
+            <input id="bg" type="color" value="#ffffff" style="height:40px;padding:2px;border-radius:6px;width:100%;">
+          </div>
+        </div>
+        <div class="field">
+          <label data-en="Size (px)" data-zh="尺寸 (像素)"></label>
+          <div class="row" style="align-items:center;">
+            <input type="range" id="size" min="128" max="640" step="32" value="320" style="flex:5;">
+            <span id="size-val" class="mono" style="flex:0 0 60px;text-align:right;color:var(--accent);">320</span>
+          </div>
+        </div>
+        <div class="field">
+          <label data-en="Error correction" data-zh="纠错级别"></label>
+          <select id="ec" class="std">
+            <option value="L">L · 7%</option>
+            <option value="M" selected>M · 15%</option>
+            <option value="Q">Q · 25%</option>
+            <option value="H">H · 30%</option>
+          </select>
+        </div>
+        <label style="display:flex;align-items:center;gap:8px;margin-top:8px;font-size:.88rem;">
+          <input type="checkbox" id="wm"> <span data-en="Add &quot;Made with Tool Hub&quot; watermark" data-zh="添加 &quot;Made with Tool Hub&quot; 水印"></span>
+        </label>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head">
+        <span class="label" data-en="Preview" data-zh="预览"></span>
+        <div class="actions">
+          <button class="mini-btn" id="dl-png">PNG</button>
+          <button class="mini-btn" id="dl-svg">SVG</button>
+          <button class="mini-btn" data-action="open-share"><span data-en="Share" data-zh="分享"></span></button>
+        </div>
+      </div>
+      <div class="panel-body">
+        <div class="qr-preview" id="qr-preview"></div>
+        <div id="wm-text" style="text-align:center;color:var(--text-dim);font-size:.78rem;margin-top:8px;display:none;">Made with tools.psyverse.fun</div>
+      </div>
+    </div>
+  </div>
+
+  <section class="seo-section">
+    <h2 data-en="What is a QR Code?" data-zh="什么是二维码？"></h2>
+    <p data-en="A QR (Quick Response) code is a 2D matrix barcode that stores data — usually a URL, text, or contact info — that smartphones can scan and act on instantly. They're ubiquitous on posters, business cards, restaurant menus, and product packaging." data-zh="QR（Quick Response）码是一种二维矩阵条形码，可存储数据（通常是网址、文本或联系信息），手机扫描后可即刻识别并执行。广泛用于海报、名片、菜单和产品包装。"></p>
+
+    <h3 data-en="How to use" data-zh="使用方法"></h3>
+    <ul>
+      <li data-en="Type or paste your URL / text into the content field" data-zh="将网址或文本输入到「内容」框"></li>
+      <li data-en="Pick foreground and background colors. Keep contrast strong." data-zh="选择前景色与背景色，保持对比度高"></li>
+      <li data-en="Click PNG or SVG to download" data-zh="点击 PNG 或 SVG 下载"></li>
+      <li data-en="Use error correction H if you plan to overlay a logo" data-zh="若计划添加 logo，请选择 H 级纠错"></li>
+    </ul>
+
+    <h3 data-en="Embed this tool" data-zh="嵌入此工具"></h3>
+    <div class="embed-block">
+      &lt;iframe src="https://tools.psyverse.fun/qr-code-generator" width="100%" height="700" frameborder="0"&gt;&lt;/iframe&gt;
+      <button class="copy-mini" data-copy='<iframe src="https://tools.psyverse.fun/qr-code-generator" width="100%" height="700" frameborder="0"></iframe>'><span data-en="Copy" data-zh="复制"></span></button>
+    </div>
+
+    <h2 data-en="FAQ" data-zh="常见问题"></h2>
+    <div class="faq-item"><div class="faq-q" data-en="Are these QR codes free for commercial use?" data-zh="这些二维码可商用吗？"></div><div class="faq-a" data-en="Yes. QR codes generated here are unrestricted — use them on products, posters, marketing materials, anywhere." data-zh="可以。本工具生成的二维码不受限制，可用于产品、海报、营销材料等任何场景。"></div></div>
+    <div class="faq-item"><div class="faq-q" data-en="Do they expire?" data-zh="会过期吗？"></div><div class="faq-a" data-en="No. The QR code encodes your data directly. As long as the destination URL is alive, the code works forever." data-zh="不会。二维码直接编码你的数据。只要目标网址存活，二维码就永久有效。"></div></div>
+    <div class="faq-item"><div class="faq-q" data-en="What's the size limit?" data-zh="数据量上限是多少？"></div><div class="faq-a" data-en="Up to ~2KB of text. Shorter content scans faster — for long URLs consider a URL shortener first." data-zh="约 2KB 文本。内容越短扫描越快 — 长网址建议先用短链接服务。"></div></div>
+  </section>
+</main>
+
+<div class="modal-bg" id="share-modal" data-action="close-modal">
+  <div class="modal" onclick="event.stopPropagation()">
+    <h3 data-en="Share this tool" data-zh="分享此工具"></h3>
+    <div class="modal-link"></div>
+    <div class="modal-share-row">
+      <a class="action-btn" target="_blank" data-share-x>X / Twitter</a>
+      <a class="action-btn" target="_blank" data-share-fb>Facebook</a>
+      <a class="action-btn" target="_blank" data-share-li>LinkedIn</a>
+      <button class="action-btn primary" data-share-copy data-copy="target"><span data-en="Copy link" data-zh="复制链接"></span></button>
+    </div>
+  </div>
+</div>
+
+<script src="/shared.js"></script>
+<script>
+const $ = s => document.querySelector(s);
+const content = $('#content'), fg = $('#fg'), bg = $('#bg'), size = $('#size'), ec = $('#ec');
+const sizeVal = $('#size-val'), preview = $('#qr-preview'), wm = $('#wm'), wmText = $('#wm-text');
+
+let qr;
+function render() {
+  preview.innerHTML = '';
+  const text = content.value.trim() || ' ';
+  const ECMap = { L: QRCode.CorrectLevel.L, M: QRCode.CorrectLevel.M, Q: QRCode.CorrectLevel.Q, H: QRCode.CorrectLevel.H };
+  qr = new QRCode(preview, {
+    text, width: +size.value, height: +size.value,
+    colorDark: fg.value, colorLight: bg.value, correctLevel: ECMap[ec.value]
+  });
+  sizeVal.textContent = size.value;
+  wmText.style.display = wm.checked ? 'block' : 'none';
+  TH.saveInput('qr', JSON.stringify({ text, fg: fg.value, bg: bg.value, size: size.value, ec: ec.value, wm: wm.checked }));
+}
+
+[content, fg, bg, size, ec, wm].forEach(el => el.addEventListener('input', render));
+
+$('#dl-png').onclick = () => {
+  const canvas = preview.querySelector('canvas');
+  if (!canvas) return;
+  let final = canvas;
+  if (wm.checked) {
+    const c = document.createElement('canvas');
+    c.width = canvas.width; c.height = canvas.height + 30;
+    const ctx = c.getContext('2d');
+    ctx.fillStyle = bg.value; ctx.fillRect(0, 0, c.width, c.height);
+    ctx.drawImage(canvas, 0, 0);
+    ctx.fillStyle = fg.value; ctx.font = '14px monospace'; ctx.textAlign = 'center';
+    ctx.fillText('Made with tools.psyverse.fun', c.width/2, canvas.height + 20);
+    final = c;
+  }
+  const a = document.createElement('a');
+  a.href = final.toDataURL('image/png'); a.download = 'qr.png'; a.click();
+};
+
+$('#dl-svg').onclick = () => {
+  const text = content.value.trim() || ' ';
+  const cell = 4, modules = qrModules(text, ec.value);
+  const n = modules.length;
+  const sz = n * cell;
+  let svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${sz}" height="${sz}" viewBox="0 0 ${sz} ${sz}"><rect width="${sz}" height="${sz}" fill="${bg.value}"/>`;
+  for (let y = 0; y < n; y++) for (let x = 0; x < n; x++) if (modules[y][x]) svg += `<rect x="${x*cell}" y="${y*cell}" width="${cell}" height="${cell}" fill="${fg.value}"/>`;
+  svg += '</svg>';
+  const blob = new Blob([svg], { type: 'image/svg+xml' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob); a.download = 'qr.svg'; a.click();
+};
+
+function qrModules(text, level) {
+  const tmp = document.createElement('div');
+  const ECMap = { L: QRCode.CorrectLevel.L, M: QRCode.CorrectLevel.M, Q: QRCode.CorrectLevel.Q, H: QRCode.CorrectLevel.H };
+  const q = new QRCode(tmp, { text, correctLevel: ECMap[level] });
+  const m = q._oQRCode.modules;
+  return m;
+}
+
+const state = TH.parseStateFromHash();
+if (state && state.text) { content.value = state.text; if (state.fg) fg.value = state.fg; if (state.bg) bg.value = state.bg; if (state.size) size.value = state.size; }
+else { try { const s = JSON.parse(TH.loadInput('qr') || '{}'); if (s.text) content.value = s.text; } catch {} }
+render();
+
+document.querySelector('[data-action="open-share"]').addEventListener('click', e => {
+  e.target.closest('[data-action]').dataset.url = TH.shareableURL({ text: content.value, fg: fg.value, bg: bg.value, size: size.value });
+});
+</script>
+</body>
+</html>

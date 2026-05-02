@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calculator — Basic & Scientific | 在线计算器（基础与科学）</title>
+<meta name="description" content="Free online calculator with basic and scientific modes. Keyboard shortcuts, expression history, instant results. Runs entirely in your browser.">
+<meta name="keywords" content="online calculator, scientific calculator, free calculator, math tool">
+<link rel="canonical" href="https://tools.psyverse.fun/calculator">
+<link rel="alternate" hreflang="en" href="https://tools.psyverse.fun/calculator">
+<link rel="alternate" hreflang="zh-CN" href="https://tools.psyverse.fun/calculator">
+<meta property="og:title" content="Calculator — Basic & Scientific">
+<meta property="og:description" content="Free online calculator with basic and scientific modes.">
+<meta property="og:url" content="https://tools.psyverse.fun/calculator">
+<meta property="og:site_name" content="Tool Hub · 工具集">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Calculator — Free Online">
+<meta name="twitter:description" content="Basic and scientific modes with keyboard shortcuts.">
+<meta name="theme-color" content="#0a0a0b">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Calculator","applicationCategory":"UtilityApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0"},"url":"https://tools.psyverse.fun/calculator"}</script>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%23c5f432'/><text x='50%25' y='52%25' font-family='monospace' font-size='15' font-weight='700' text-anchor='middle' dominant-baseline='central' fill='%230a0a0b'>{}</text></svg>">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/shared.css">
+<script src="https://analytics-dashboard-two-blue.vercel.app/tracker.js" defer></script>
+</head>
+<body data-lang="en">
+
+<header class="site-header">
+  <div class="header-inner">
+    <a href="/" class="logo"><div class="logo-mark">{}</div><span data-en="Tool Hub" data-zh="工具集"></span></a>
+    <div class="nav-spacer"></div>
+    <div class="header-controls">
+      <button class="icon-btn" data-action="random-tool"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 3h5v5M4 20 21 3M21 16v5h-5M15 15l6 6M4 4l5 5"/></svg></button>
+      <button class="icon-btn lang-btn" data-action="toggle-lang">中文</button>
+      <button class="icon-btn" data-action="toggle-theme"></button>
+    </div>
+  </div>
+</header>
+
+<main class="tool-page" style="max-width:680px;">
+  <div class="breadcrumb"><a href="/">/ Tool Hub</a> / calculator</div>
+
+  <div class="tool-header">
+    <h1 data-en="Calculator" data-zh="计算器"></h1>
+    <p class="desc" data-en="Basic and scientific modes. Use keyboard for digits, operators, Enter to evaluate, Escape to clear." data-zh="基础与科学双模式。可使用键盘输入数字、运算符，Enter 计算，Esc 清空。"></p>
+  </div>
+
+  <div class="calc">
+    <div class="calc-toggle">
+      <button class="active" data-mode="basic">Basic</button>
+      <button data-mode="sci">Scientific</button>
+    </div>
+    <div class="calc-display">
+      <div class="expr" id="expr">&nbsp;</div>
+      <div class="val" id="val">0</div>
+    </div>
+    <div id="grid" class="calc-grid"></div>
+  </div>
+
+  <div style="margin-top:24px;">
+    <h3 style="font-family:var(--display);font-size:1.05rem;margin-bottom:12px;font-weight:600;" data-en="History" data-zh="历史记录"></h3>
+    <div id="history" style="font-family:var(--mono);font-size:.85rem;color:var(--text-dim);"></div>
+  </div>
+
+  <section class="seo-section">
+    <h2 data-en="About this calculator" data-zh="关于此计算器"></h2>
+    <p data-en="A clean, fast online calculator with both basic arithmetic and a scientific mode (sin, cos, tan, log, ln, sqrt, x², powers, parentheses). Full keyboard support: digits, +, −, *, /, parentheses, Enter for =, Escape for clear." data-zh="简洁高效的在线计算器，提供基础四则运算与科学模式（sin、cos、tan、log、ln、sqrt、平方、幂、括号）。完全支持键盘：数字、+ − * /、括号，Enter 计算，Esc 清空。"></p>
+
+    <h3 data-en="Keyboard shortcuts" data-zh="键盘快捷键"></h3>
+    <ul>
+      <li><code>0-9</code>, <code>.</code> — <span data-en="digits" data-zh="数字"></span></li>
+      <li><code>+ - * /</code> — <span data-en="operators" data-zh="运算符"></span></li>
+      <li><code>Enter</code> = <span data-en="evaluate" data-zh="计算"></span></li>
+      <li><code>Backspace</code> — <span data-en="delete last char" data-zh="删除一位"></span></li>
+      <li><code>Esc</code> — <span data-en="clear" data-zh="清空"></span></li>
+    </ul>
+
+    <h3 data-en="Embed this tool" data-zh="嵌入此工具"></h3>
+    <div class="embed-block">
+      &lt;iframe src="https://tools.psyverse.fun/calculator" width="100%" height="700" frameborder="0"&gt;&lt;/iframe&gt;
+      <button class="copy-mini" data-copy='<iframe src="https://tools.psyverse.fun/calculator" width="100%" height="700" frameborder="0"></iframe>'><span data-en="Copy" data-zh="复制"></span></button>
+    </div>
+
+    <h2 data-en="FAQ" data-zh="常见问题"></h2>
+    <div class="faq-item"><div class="faq-q" data-en="Are calculations accurate?" data-zh="计算结果精确吗？"></div><div class="faq-a" data-en="Standard JavaScript double-precision floats. Accurate for most uses. For arbitrary precision, use a CAS like WolframAlpha." data-zh="使用标准 JavaScript 双精度浮点数，适用于绝大多数场景。如需任意精度，请使用 WolframAlpha 等计算机代数系统。"></div></div>
+    <div class="faq-item"><div class="faq-q" data-en="Are trig functions in radians or degrees?" data-zh="三角函数是弧度还是角度？"></div><div class="faq-a" data-en="Radians by default. For degrees, multiply by π/180 manually." data-zh="默认弧度。如需角度，请手动乘以 π/180。"></div></div>
+  </section>
+</main>
+
+<script src="/shared.js"></script>
+<script>
+const $ = s => document.querySelector(s);
+const expr = $('#expr'), val = $('#val'), grid = $('#grid'), history = $('#history');
+let cur = '', last = '0', mode = 'basic';
+
+const BASIC = [
+  ['C','clr'],['(','op'],[')','op'],['/','op'],
+  ['7',''],['8',''],['9',''],['*','op'],
+  ['4',''],['5',''],['6',''],['-','op'],
+  ['1',''],['2',''],['3',''],['+','op'],
+  ['0',''],['.',''],['=','eq'],
+];
+const SCI = [
+  ['C','clr'],['(','op'],[')','op'],['^','op'],['π','op'],
+  ['sin','op'],['cos','op'],['tan','op'],['log','op'],['e','op'],
+  ['√','op'],['7',''],['8',''],['9',''],['/','op'],
+  ['x²','op'],['4',''],['5',''],['6',''],['*','op'],
+  ['ln','op'],['1',''],['2',''],['3',''],['-','op'],
+  ['!','op'],['0',''],['.',''],['=','eq'],['+','op'],
+];
+
+function renderGrid() {
+  grid.className = mode === 'sci' ? 'calc-grid sci' : 'calc-grid';
+  const set = mode === 'sci' ? SCI : BASIC;
+  grid.innerHTML = set.map(([k, t]) => `<button class="calc-btn ${t}" data-key="${k}">${k}</button>`).join('');
+}
+renderGrid();
+
+document.querySelectorAll('[data-mode]').forEach(b => b.onclick = () => {
+  document.querySelectorAll('[data-mode]').forEach(x => x.classList.remove('active'));
+  b.classList.add('active'); mode = b.dataset.mode; renderGrid();
+});
+
+grid.addEventListener('click', e => {
+  const k = e.target.dataset.key; if (!k) return; press(k);
+});
+
+function press(k) {
+  if (k === 'C') { cur = ''; last = '0'; expr.textContent = '\u00A0'; val.textContent = '0'; return; }
+  if (k === '=') { evalNow(); return; }
+  if (k === 'π') cur += 'Math.PI';
+  else if (k === 'e') cur += 'Math.E';
+  else if (k === 'sin') cur += 'Math.sin(';
+  else if (k === 'cos') cur += 'Math.cos(';
+  else if (k === 'tan') cur += 'Math.tan(';
+  else if (k === 'log') cur += 'Math.log10(';
+  else if (k === 'ln') cur += 'Math.log(';
+  else if (k === '√') cur += 'Math.sqrt(';
+  else if (k === 'x²') cur += '**2';
+  else if (k === '^') cur += '**';
+  else if (k === '!') cur = `fact(${cur})`;
+  else cur += k;
+  expr.textContent = displayExpr(cur);
+  try { const v = evaluate(cur); if (Number.isFinite(v)) val.textContent = format(v); } catch {}
+}
+
+function evalNow() {
+  try {
+    const v = evaluate(cur);
+    if (!Number.isFinite(v)) throw new Error('overflow');
+    last = format(v);
+    history.innerHTML = `<div style="padding:6px 0;border-bottom:1px solid var(--border);">${displayExpr(cur)} = <span style="color:var(--accent);">${last}</span></div>` + history.innerHTML;
+    cur = String(v);
+    val.textContent = last; expr.textContent = '\u00A0';
+  } catch (e) { val.textContent = 'Error'; }
+}
+
+function displayExpr(s) {
+  return s.replace(/Math\.PI/g, 'π').replace(/Math\.E/g, 'e').replace(/Math\.sin\(/g, 'sin(').replace(/Math\.cos\(/g, 'cos(').replace(/Math\.tan\(/g, 'tan(').replace(/Math\.log10\(/g, 'log(').replace(/Math\.log\(/g, 'ln(').replace(/Math\.sqrt\(/g, '√(').replace(/\*\*/g, '^');
+}
+
+function evaluate(s) {
+  const fact = n => n <= 1 ? 1 : n * fact(n - 1);
+  return Function('"use strict";const fact=' + fact + ';return (' + (s || '0') + ')')();
+}
+
+function format(v) {
+  if (Math.abs(v) > 1e15 || (Math.abs(v) < 1e-6 && v !== 0)) return v.toExponential(6);
+  return parseFloat(v.toPrecision(12)).toString();
+}
+
+document.addEventListener('keydown', e => {
+  if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+  const k = e.key;
+  if (/[0-9.+\-*/()]/.test(k)) { press(k); }
+  else if (k === 'Enter' || k === '=') { e.preventDefault(); press('='); }
+  else if (k === 'Escape') press('C');
+  else if (k === 'Backspace') { cur = cur.slice(0, -1); expr.textContent = displayExpr(cur); }
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Markdown Preview — Live Editor | Markdown 实时预览编辑器</title>
+<meta name="description" content="Live markdown editor with side-by-side preview. GitHub-flavored markdown, code blocks, syntax highlighting. Free and browser-based.">
+<meta name="keywords" content="markdown editor, markdown preview, online markdown, gfm, markdown live, markdown to html">
+<link rel="canonical" href="https://tools.psyverse.fun/markdown-preview">
+<link rel="alternate" hreflang="en" href="https://tools.psyverse.fun/markdown-preview">
+<link rel="alternate" hreflang="zh-CN" href="https://tools.psyverse.fun/markdown-preview">
+<meta property="og:title" content="Markdown Preview — Live Editor with Side-by-side Preview">
+<meta property="og:description" content="Write GitHub-flavored markdown with instant preview, code blocks, and syntax highlighting.">
+<meta property="og:url" content="https://tools.psyverse.fun/markdown-preview">
+<meta property="og:site_name" content="Tool Hub · 工具集">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Markdown Preview — Free Online Editor">
+<meta name="twitter:description" content="Live markdown rendering, GFM support, fully client-side.">
+<meta name="theme-color" content="#0a0a0b">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Markdown Preview","applicationCategory":"DeveloperApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0"},"url":"https://tools.psyverse.fun/markdown-preview"}</script>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%23c5f432'/><text x='50%25' y='52%25' font-family='monospace' font-size='15' font-weight='700' text-anchor='middle' dominant-baseline='central' fill='%230a0a0b'>{}</text></svg>">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/shared.css">
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/dompurify@3.0.6/dist/purify.min.js"></script>
+<script src="https://analytics-dashboard-two-blue.vercel.app/tracker.js" defer></script>
+</head>
+<body data-lang="en">
+
+<header class="site-header">
+  <div class="header-inner">
+    <a href="/" class="logo"><div class="logo-mark">{}</div><span data-en="Tool Hub" data-zh="工具集"></span></a>
+    <div class="nav-spacer"></div>
+    <div class="header-controls">
+      <button class="icon-btn" data-action="random-tool"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 3h5v5M4 20 21 3M21 16v5h-5M15 15l6 6M4 4l5 5"/></svg></button>
+      <button class="icon-btn lang-btn" data-action="toggle-lang">中文</button>
+      <button class="icon-btn" data-action="toggle-theme"></button>
+    </div>
+  </div>
+</header>
+
+<main class="tool-page">
+  <div class="breadcrumb"><a href="/">/ Tool Hub</a> / markdown-preview</div>
+
+  <div class="tool-header">
+    <h1 data-en="Markdown Preview" data-zh="Markdown 实时预览"></h1>
+    <p class="desc" data-en="Write markdown on the left, see rendered HTML on the right. GitHub-flavored markdown with code blocks, tables, task lists. All in your browser." data-zh="左侧编写 Markdown，右侧实时查看渲染效果。支持 GitHub 风格 Markdown：代码块、表格、任务列表。全部在浏览器中运行。"></p>
+    <div class="tool-actions">
+      <button class="action-btn" id="btn-sample"><span data-en="Sample" data-zh="示例"></span></button>
+      <button class="action-btn" id="btn-clear"><span data-en="Clear" data-zh="清空"></span></button>
+      <button class="action-btn" id="btn-dl-md"><span data-en="Download MD" data-zh="下载 MD"></span></button>
+      <button class="action-btn" id="btn-dl-html"><span data-en="Download HTML" data-zh="下载 HTML"></span></button>
+      <button class="action-btn" data-action="open-share"><span data-en="Share" data-zh="分享"></span></button>
+    </div>
+  </div>
+
+  <div class="workspace">
+    <div class="panel">
+      <div class="panel-head"><span class="label" data-en="Markdown" data-zh="Markdown"></span></div>
+      <div class="panel-body" style="padding:0;">
+        <textarea id="md" class="code" style="padding:14px 16px;min-height:520px;"># Hello, Markdown
+
+Type **markdown** here.
+
+- list item
+- [x] task
+- [ ] todo
+
+\`\`\`js
+console.log("hello");
+\`\`\`</textarea>
+      </div>
+    </div>
+    <div class="panel">
+      <div class="panel-head">
+        <span class="label" data-en="Preview" data-zh="预览"></span>
+        <div class="actions">
+          <button class="mini-btn" data-copy="target" data-target="#html"><span data-en="Copy HTML" data-zh="复制 HTML"></span></button>
+        </div>
+      </div>
+      <div class="panel-body">
+        <div id="prev" class="md-preview"></div>
+        <textarea id="html" style="display:none;"></textarea>
+      </div>
+    </div>
+  </div>
+
+  <section class="seo-section">
+    <h2 data-en="What is Markdown?" data-zh="什么是 Markdown？"></h2>
+    <p data-en="Markdown is a lightweight markup language that lets you format text using plain-text symbols (# for headings, * for emphasis). It's the de facto standard for README files, blog posts, documentation, and chat applications." data-zh="Markdown 是一种轻量级标记语言，可使用纯文本符号（# 表示标题、* 表示强调）格式化文本。是 README 文件、博客、文档和聊天应用的事实标准。"></p>
+
+    <h3 data-en="Quick syntax" data-zh="语法速查"></h3>
+    <ul>
+      <li><code># Heading 1</code>, <code>## Heading 2</code></li>
+      <li><code>**bold**</code>, <code>*italic*</code>, <code>~~strikethrough~~</code></li>
+      <li><code>[link](url)</code>, <code>![alt](image-url)</code></li>
+      <li><code>- bullet</code>, <code>1. numbered</code>, <code>- [ ] task</code></li>
+      <li><code>`inline code`</code>, <code>```fenced code```</code></li>
+      <li><code>&gt; blockquote</code>, <code>--- horizontal rule</code></li>
+    </ul>
+
+    <h3 data-en="Embed this tool" data-zh="嵌入此工具"></h3>
+    <div class="embed-block">
+      &lt;iframe src="https://tools.psyverse.fun/markdown-preview" width="100%" height="700" frameborder="0"&gt;&lt;/iframe&gt;
+      <button class="copy-mini" data-copy='<iframe src="https://tools.psyverse.fun/markdown-preview" width="100%" height="700" frameborder="0"></iframe>'><span data-en="Copy" data-zh="复制"></span></button>
+    </div>
+
+    <h2 data-en="FAQ" data-zh="常见问题"></h2>
+    <div class="faq-item"><div class="faq-q" data-en="Which markdown flavor?" data-zh="支持哪种 Markdown？"></div><div class="faq-a" data-en="GitHub-flavored markdown (GFM): tables, task lists, fenced code, strikethrough, autolinks." data-zh="GitHub 风格 Markdown (GFM)：表格、任务列表、围栏代码块、删除线、自动链接。"></div></div>
+    <div class="faq-item"><div class="faq-q" data-en="Is the HTML safe?" data-zh="生成的 HTML 安全吗？"></div><div class="faq-a" data-en="Yes — all HTML is sanitized via DOMPurify before rendering, blocking XSS." data-zh="安全。所有 HTML 在渲染前都经 DOMPurify 净化，可防 XSS。"></div></div>
+    <div class="faq-item"><div class="faq-q" data-en="Can I export?" data-zh="可以导出吗？"></div><div class="faq-a" data-en="Yes. Use Download MD for the source, Download HTML for the rendered output." data-zh="可以。「下载 MD」导出源文件，「下载 HTML」导出渲染结果。"></div></div>
+  </section>
+</main>
+
+<div class="modal-bg" id="share-modal" data-action="close-modal">
+  <div class="modal" onclick="event.stopPropagation()">
+    <h3 data-en="Share this link" data-zh="分享链接"></h3>
+    <div class="modal-link"></div>
+    <div class="modal-share-row">
+      <a class="action-btn" target="_blank" data-share-x>X / Twitter</a>
+      <a class="action-btn" target="_blank" data-share-fb>Facebook</a>
+      <a class="action-btn" target="_blank" data-share-li>LinkedIn</a>
+      <button class="action-btn primary" data-share-copy data-copy="target"><span data-en="Copy link" data-zh="复制链接"></span></button>
+    </div>
+  </div>
+</div>
+
+<script src="/shared.js"></script>
+<script>
+const $ = s => document.querySelector(s);
+const md = $('#md'), prev = $('#prev'), html = $('#html');
+
+marked.setOptions({ gfm: true, breaks: true });
+
+function render() {
+  const out = DOMPurify.sanitize(marked.parse(md.value));
+  prev.innerHTML = out;
+  html.value = out;
+  TH.saveInput('md', md.value);
+}
+
+md.addEventListener('input', render);
+
+$('#btn-sample').onclick = () => {
+  md.value = `# Tool Hub
+
+A focused set of **fast**, *beautiful* utilities.
+
+## Tools
+- JSON Formatter
+- Regex Tester
+- [x] QR Generator
+- [ ] Color Picker (planned)
+
+## Code
+
+\\\`\\\`\\\`js
+function tools() {
+  return ['fast', 'free', 'private'];
+}
+\\\`\\\`\\\`
+
+> Quote: tools that just work.
+
+| Feature | Status |
+|---|---|
+| Free | ✓ |
+| Private | ✓ |
+| Fast | ✓ |
+
+[Visit Tool Hub](https://tools.psyverse.fun)`.replace(/\\\`/g, '`');
+  render();
+};
+$('#btn-clear').onclick = () => { md.value = ''; render(); };
+$('#btn-dl-md').onclick = () => download(md.value, 'document.md', 'text/markdown');
+$('#btn-dl-html').onclick = () => download('<!doctype html><meta charset=utf-8><title>Document</title>' + html.value, 'document.html', 'text/html');
+
+function download(text, name, type) {
+  const blob = new Blob([text], { type });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob); a.download = name; a.click();
+}
+
+const state = TH.parseStateFromHash();
+if (state && state.text) md.value = state.text;
+else { const saved = TH.loadInput('md'); if (saved) md.value = saved; }
+render();
+
+document.querySelector('[data-action="open-share"]').addEventListener('click', e => {
+  e.target.closest('[data-action]').dataset.url = TH.shareableURL({ text: md.value });
+});
+</script>
+</body>
+</html>

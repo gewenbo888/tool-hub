@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Password Generator — Strong Random Passwords | 密码生成器</title>
+<meta name="description" content="Generate strong random passwords with custom length, character sets, and a real-time strength meter. Free, instant, fully client-side.">
+<meta name="keywords" content="password generator, strong password, random password, secure password, password tool">
+<link rel="canonical" href="https://tools.psyverse.fun/password-generator">
+<link rel="alternate" hreflang="en" href="https://tools.psyverse.fun/password-generator">
+<link rel="alternate" hreflang="zh-CN" href="https://tools.psyverse.fun/password-generator">
+<meta property="og:title" content="Password Generator — Strong, Random, Secure">
+<meta property="og:description" content="Generate strong random passwords with adjustable length and character sets. 100% local.">
+<meta property="og:url" content="https://tools.psyverse.fun/password-generator">
+<meta property="og:site_name" content="Tool Hub · 工具集">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Password Generator — Free Online Tool">
+<meta name="twitter:description" content="Strong random passwords with strength meter, runs entirely in your browser.">
+<meta name="theme-color" content="#0a0a0b">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Password Generator","applicationCategory":"SecurityApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0"},"url":"https://tools.psyverse.fun/password-generator"}</script>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%23c5f432'/><text x='50%25' y='52%25' font-family='monospace' font-size='15' font-weight='700' text-anchor='middle' dominant-baseline='central' fill='%230a0a0b'>{}</text></svg>">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/shared.css">
+<script src="https://analytics-dashboard-two-blue.vercel.app/tracker.js" defer></script>
+</head>
+<body data-lang="en">
+
+<header class="site-header">
+  <div class="header-inner">
+    <a href="/" class="logo"><div class="logo-mark">{}</div><span data-en="Tool Hub" data-zh="工具集"></span></a>
+    <div class="nav-spacer"></div>
+    <div class="header-controls">
+      <button class="icon-btn" data-action="random-tool"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 3h5v5M4 20 21 3M21 16v5h-5M15 15l6 6M4 4l5 5"/></svg></button>
+      <button class="icon-btn lang-btn" data-action="toggle-lang">中文</button>
+      <button class="icon-btn" data-action="toggle-theme"></button>
+    </div>
+  </div>
+</header>
+
+<main class="tool-page" style="max-width:680px;">
+  <div class="breadcrumb"><a href="/">/ Tool Hub</a> / password-generator</div>
+
+  <div class="tool-header">
+    <h1 data-en="Password Generator" data-zh="密码生成器"></h1>
+    <p class="desc" data-en="Generate strong, cryptographically random passwords. Choose length and character sets, see strength in real time. Nothing is sent anywhere." data-zh="生成强加密随机密码。可调长度和字符集，实时显示密码强度。所有操作均在本地完成，绝不上传。"></p>
+  </div>
+
+  <div class="pw-display" id="pw">click generate</div>
+
+  <div class="strength-bar"><div class="strength-fill" id="sfill" style="width:0%;background:var(--text-faint);"></div></div>
+  <div class="strength-label"><span id="slabel" style="color:var(--text-faint);">—</span> · <span id="entropy" style="color:var(--text-dim);">0 bits</span></div>
+
+  <div class="tool-actions" style="margin-top:14px;">
+    <button class="action-btn primary" id="btn-gen"><span data-en="Generate" data-zh="生成"></span></button>
+    <button class="action-btn" data-copy="target" data-target="#pw"><span data-en="Copy" data-zh="复制"></span></button>
+    <button class="action-btn" data-action="open-share"><span data-en="Share" data-zh="分享"></span></button>
+  </div>
+
+  <div style="margin-top:28px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:22px;">
+
+    <div class="field">
+      <label data-en="Length" data-zh="长度"></label>
+      <div class="row" style="align-items:center;">
+        <input type="range" id="len" min="6" max="64" value="20" style="flex:5;">
+        <span id="len-val" class="mono" style="flex:0 0 50px;text-align:right;font-size:1rem;font-weight:600;color:var(--accent);">20</span>
+      </div>
+    </div>
+
+    <div class="options-grid">
+      <label class="option-row"><input type="checkbox" id="opt-upper" checked> <span data-en="Uppercase A-Z" data-zh="大写 A-Z"></span></label>
+      <label class="option-row"><input type="checkbox" id="opt-lower" checked> <span data-en="Lowercase a-z" data-zh="小写 a-z"></span></label>
+      <label class="option-row"><input type="checkbox" id="opt-num" checked> <span data-en="Numbers 0-9" data-zh="数字 0-9"></span></label>
+      <label class="option-row"><input type="checkbox" id="opt-sym" checked> <span data-en="Symbols !@#$" data-zh="符号 !@#$"></span></label>
+      <label class="option-row"><input type="checkbox" id="opt-noambig"> <span data-en="No ambiguous (0OIl)" data-zh="排除易混 (0OIl)"></span></label>
+      <label class="option-row"><input type="checkbox" id="opt-pron"> <span data-en="Pronounceable" data-zh="可发音"></span></label>
+    </div>
+  </div>
+
+  <div style="margin-top:28px;">
+    <h3 style="font-family:var(--display);font-size:1.05rem;margin-bottom:12px;font-weight:600;" data-en="Recent passwords" data-zh="最近生成"></h3>
+    <div id="history" style="font-family:var(--mono);font-size:.85rem;color:var(--text-dim);"></div>
+  </div>
+
+  <section class="seo-section">
+    <h2 data-en="What makes a password strong?" data-zh="什么样的密码才算强？"></h2>
+    <p data-en="A strong password is long, random, and uses multiple character types. Length matters most: a 16-character random password is exponentially harder to crack than 8 characters, regardless of complexity rules." data-zh="强密码要够长、足够随机、包含多种字符类型。长度最重要：一段 16 字符的随机密码远比 8 字符密码（即便有复杂规则）更难破解。"></p>
+
+    <h3 data-en="How to use" data-zh="使用方法"></h3>
+    <ul>
+      <li data-en="Pick a length — 16+ for normal use, 24+ for high-stakes accounts" data-zh="选择长度 — 一般场景 16 位以上，高安全场景 24 位以上"></li>
+      <li data-en="Toggle character sets to match site requirements" data-zh="按网站要求切换字符集"></li>
+      <li data-en="Click Generate, then Copy. Save it in a password manager — never reuse." data-zh="点击「生成」，然后「复制」。请保存到密码管理器，切勿重复使用。"></li>
+    </ul>
+
+    <h3 data-en="Embed this tool" data-zh="嵌入此工具"></h3>
+    <div class="embed-block">
+      &lt;iframe src="https://tools.psyverse.fun/password-generator" width="100%" height="700" frameborder="0"&gt;&lt;/iframe&gt;
+      <button class="copy-mini" data-copy='<iframe src="https://tools.psyverse.fun/password-generator" width="100%" height="700" frameborder="0"></iframe>'><span data-en="Copy" data-zh="复制"></span></button>
+    </div>
+
+    <h2 data-en="FAQ" data-zh="常见问题"></h2>
+    <div class="faq-item"><div class="faq-q" data-en="Is the random number generator secure?" data-zh="随机数生成器安全吗？"></div><div class="faq-a" data-en="Yes — we use the browser's crypto.getRandomValues(), which is cryptographically secure. Math.random() is never used." data-zh="安全。本工具使用浏览器内置的 crypto.getRandomValues()，是密码学安全的随机源。绝不使用 Math.random()。"></div></div>
+    <div class="faq-item"><div class="faq-q" data-en="Are passwords stored or sent?" data-zh="密码会被存储或上传吗？"></div><div class="faq-a" data-en="Generated passwords stay only in your browser memory. The recent list lives in your local browser storage and never leaves your device." data-zh="生成的密码仅保留在浏览器内存中。「最近生成」列表存储在本地浏览器，不会传出设备。"></div></div>
+    <div class="faq-item"><div class="faq-q" data-en="What length should I use?" data-zh="该选多长？"></div><div class="faq-a" data-en="16 characters with mixed sets is great for everyday accounts. 24+ for banking, email, or master passwords. Length wins over symbol density." data-zh="日常账户 16 位混合字符即可。银行、邮箱、主密码建议 24 位以上。长度比符号密度更重要。"></div></div>
+  </section>
+</main>
+
+<div class="modal-bg" id="share-modal" data-action="close-modal">
+  <div class="modal" onclick="event.stopPropagation()">
+    <h3 data-en="Share this tool" data-zh="分享此工具"></h3>
+    <div class="modal-link"></div>
+    <div class="modal-share-row">
+      <a class="action-btn" target="_blank" data-share-x>X / Twitter</a>
+      <a class="action-btn" target="_blank" data-share-fb>Facebook</a>
+      <a class="action-btn" target="_blank" data-share-li>LinkedIn</a>
+      <button class="action-btn primary" data-share-copy data-copy="target"><span data-en="Copy link" data-zh="复制链接"></span></button>
+    </div>
+  </div>
+</div>
+
+<script src="/shared.js"></script>
+<script>
+const $ = s => document.querySelector(s);
+const len = $('#len'), lenVal = $('#len-val'), pw = $('#pw');
+const fill = $('#sfill'), label = $('#slabel'), entropyEl = $('#entropy'), history = $('#history');
+
+const SETS = {
+  upper: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
+  lower: 'abcdefghijklmnopqrstuvwxyz',
+  num:   '0123456789',
+  sym:   '!@#$%^&*()-_=+[]{};:,.<>/?',
+  ambig: '0OIl1'
+};
+const PRON_C = 'bcdfghjklmnpqrstvwxz', PRON_V = 'aeiouy';
+
+function randInt(max) {
+  const buf = new Uint32Array(1);
+  crypto.getRandomValues(buf);
+  return buf[0] % max;
+}
+function pick(s) { return s[randInt(s.length)]; }
+
+function buildPool() {
+  let pool = '';
+  if ($('#opt-upper').checked) pool += SETS.upper;
+  if ($('#opt-lower').checked) pool += SETS.lower;
+  if ($('#opt-num').checked)   pool += SETS.num;
+  if ($('#opt-sym').checked)   pool += SETS.sym;
+  if ($('#opt-noambig').checked) pool = pool.split('').filter(c => !SETS.ambig.includes(c)).join('');
+  return pool;
+}
+
+function generate() {
+  const length = +len.value;
+  let result = '';
+  if ($('#opt-pron').checked) {
+    let toggle = randInt(2);
+    for (let i = 0; i < length; i++) {
+      result += pick(toggle ? PRON_C : PRON_V);
+      toggle = 1 - toggle;
+    }
+    if ($('#opt-num').checked) result = result.slice(0, -2) + pick(SETS.num) + pick(SETS.num);
+  } else {
+    const pool = buildPool();
+    if (!pool) { pw.textContent = 'Pick at least one set'; return; }
+    for (let i = 0; i < length; i++) result += pick(pool);
+  }
+  pw.textContent = result;
+  updateStrength(result);
+  saveHistory(result);
+}
+
+function updateStrength(p) {
+  const pool = buildPool().length || 26;
+  const bits = Math.log2(pool) * p.length;
+  let pct = Math.min(100, bits / 1.28);
+  let color = 'var(--danger)', txt = 'Weak', zh = '弱';
+  if (bits >= 60) { color = 'var(--good)';  txt = 'Strong'; zh = '强'; }
+  else if (bits >= 40) { color = 'var(--accent)'; txt = 'Good'; zh = '良好'; }
+  else if (bits >= 28) { color = 'var(--warn)'; txt = 'Medium'; zh = '中等'; }
+  fill.style.width = pct + '%'; fill.style.background = color;
+  label.textContent = document.body.dataset.lang === 'zh' ? zh : txt;
+  label.style.color = color;
+  entropyEl.textContent = bits.toFixed(1) + ' bits';
+}
+
+function saveHistory(pwd) {
+  let h = JSON.parse(localStorage.getItem('th-pw-hist') || '[]');
+  h.unshift(pwd);
+  h = h.slice(0, 5);
+  localStorage.setItem('th-pw-hist', JSON.stringify(h));
+  renderHistory();
+}
+function renderHistory() {
+  const h = JSON.parse(localStorage.getItem('th-pw-hist') || '[]');
+  history.innerHTML = h.length
+    ? h.map(p => `<div style="padding:6px 10px;background:var(--surface);border:1px solid var(--border);border-radius:4px;margin-bottom:4px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;" onclick="navigator.clipboard.writeText(this.querySelector('span').textContent);TH.toast('Copied!','已复制!');"><span>${p}</span><span style="color:var(--text-faint);font-size:.7rem;">click to copy</span></div>`).join('')
+    : '<span class="empty">No history yet.</span>';
+}
+
+len.addEventListener('input', () => { lenVal.textContent = len.value; });
+$('#btn-gen').onclick = generate;
+document.querySelectorAll('input[type=checkbox], #len').forEach(el => el.addEventListener('change', () => { if (pw.textContent !== 'click generate') generate(); }));
+
+generate();
+renderHistory();
+</script>
+</body>
+</html>

@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Regex Tester — Live Regular Expression Tool | 正则表达式测试</title>
+<meta name="description" content="Test JavaScript regular expressions with live highlighted matches, capture groups, and flags. Free, instant, browser-side regex testing.">
+<meta name="keywords" content="regex tester, regular expression, regex online, javascript regex, regex match, regex tool">
+<link rel="canonical" href="https://tools.psyverse.fun/regex-tester">
+<link rel="alternate" hreflang="en" href="https://tools.psyverse.fun/regex-tester">
+<link rel="alternate" hreflang="zh-CN" href="https://tools.psyverse.fun/regex-tester">
+<meta property="og:title" content="Regex Tester — Live Regex Highlighting">
+<meta property="og:description" content="Test regular expressions with instant match highlighting and capture group inspection.">
+<meta property="og:url" content="https://tools.psyverse.fun/regex-tester">
+<meta property="og:site_name" content="Tool Hub · 工具集">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Regex Tester — Free Online Tool">
+<meta name="twitter:description" content="Live regex match highlighting, capture groups, all JS flags.">
+<meta name="theme-color" content="#0a0a0b">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Regex Tester","applicationCategory":"DeveloperApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0"},"url":"https://tools.psyverse.fun/regex-tester"}</script>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%23c5f432'/><text x='50%25' y='52%25' font-family='monospace' font-size='15' font-weight='700' text-anchor='middle' dominant-baseline='central' fill='%230a0a0b'>{}</text></svg>">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/shared.css">
+<script src="https://analytics-dashboard-two-blue.vercel.app/tracker.js" defer></script>
+</head>
+<body data-lang="en">
+
+<header class="site-header">
+  <div class="header-inner">
+    <a href="/" class="logo"><div class="logo-mark">{}</div><span data-en="Tool Hub" data-zh="工具集"></span></a>
+    <div class="nav-spacer"></div>
+    <div class="header-controls">
+      <button class="icon-btn" data-action="random-tool"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 3h5v5M4 20 21 3M21 16v5h-5M15 15l6 6M4 4l5 5"/></svg></button>
+      <button class="icon-btn lang-btn" data-action="toggle-lang">中文</button>
+      <button class="icon-btn" data-action="toggle-theme"></button>
+    </div>
+  </div>
+</header>
+
+<main class="tool-page">
+  <div class="breadcrumb"><a href="/">/ Tool Hub</a> / regex-tester</div>
+
+  <div class="tool-header">
+    <h1 data-en="Regex Tester" data-zh="正则表达式测试"></h1>
+    <p class="desc" data-en="Test JavaScript regular expressions live. See matches highlighted, inspect capture groups, toggle flags. All in your browser." data-zh="实时测试 JavaScript 正则表达式。匹配高亮显示，可查看捕获组，自由切换标志位。全部在浏览器中运行。"></p>
+    <div class="tool-actions">
+      <button class="action-btn" id="btn-sample"><span data-en="Sample" data-zh="示例"></span></button>
+      <button class="action-btn" id="btn-clear"><span data-en="Clear" data-zh="清空"></span></button>
+      <button class="action-btn" data-action="open-share"><span data-en="Share" data-zh="分享"></span></button>
+    </div>
+  </div>
+
+  <div class="row" style="margin-bottom:14px;gap:8px;">
+    <div style="flex:5;">
+      <div class="row" style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:0;align-items:stretch;">
+        <span style="padding:10px 4px 10px 14px;color:var(--text-faint);font-family:var(--mono);">/</span>
+        <input id="pattern" type="text" placeholder="\\b\\w+@\\w+\\.\\w+\\b" style="background:transparent;border:none;flex:7;border-radius:0;padding:10px 4px;">
+        <span style="padding:10px 4px;color:var(--text-faint);font-family:var(--mono);">/</span>
+        <input id="flags" type="text" value="g" placeholder="gi" style="background:transparent;border:none;flex:1;width:60px;padding:10px 12px 10px 4px;font-family:var(--mono);">
+      </div>
+    </div>
+  </div>
+
+  <div class="row" style="margin-bottom:18px;flex-wrap:wrap;gap:10px;font-size:.85rem;flex:0 0 auto;">
+    <label style="display:flex;align-items:center;gap:6px;flex:0;"><input type="checkbox" data-flag="g" checked> g <span style="color:var(--text-faint);font-size:.78rem;" data-en="global" data-zh="全局"></span></label>
+    <label style="display:flex;align-items:center;gap:6px;flex:0;"><input type="checkbox" data-flag="i"> i <span style="color:var(--text-faint);font-size:.78rem;" data-en="case-insensitive" data-zh="忽略大小写"></span></label>
+    <label style="display:flex;align-items:center;gap:6px;flex:0;"><input type="checkbox" data-flag="m"> m <span style="color:var(--text-faint);font-size:.78rem;" data-en="multiline" data-zh="多行"></span></label>
+    <label style="display:flex;align-items:center;gap:6px;flex:0;"><input type="checkbox" data-flag="s"> s <span style="color:var(--text-faint);font-size:.78rem;" data-en="dotall" data-zh="点匹配换行"></span></label>
+    <label style="display:flex;align-items:center;gap:6px;flex:0;"><input type="checkbox" data-flag="u"> u <span style="color:var(--text-faint);font-size:.78rem;" data-en="unicode" data-zh="Unicode"></span></label>
+  </div>
+
+  <div class="regex-info" id="info"></div>
+
+  <div class="panel" style="margin-bottom:14px;">
+    <div class="panel-head">
+      <span class="label" data-en="Test string" data-zh="测试字符串"></span>
+    </div>
+    <div class="panel-body" style="padding:0;">
+      <textarea id="text" class="code" placeholder="Paste text to test against the pattern..." style="padding:14px 16px;min-height:180px;"></textarea>
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="panel-head">
+      <span class="label" data-en="Highlighted matches" data-zh="高亮匹配结果"></span>
+    </div>
+    <div class="panel-body">
+      <pre id="result" class="output-pre"></pre>
+    </div>
+  </div>
+
+  <div class="panel" style="margin-top:14px;">
+    <div class="panel-head">
+      <span class="label" data-en="Match details" data-zh="匹配详情"></span>
+    </div>
+    <div class="panel-body">
+      <pre id="groups" class="output-pre" style="font-size:.82rem;"></pre>
+    </div>
+  </div>
+
+  <section class="seo-section">
+    <h2 data-en="What is a Regex Tester?" data-zh="什么是正则表达式测试工具？"></h2>
+    <p data-en="A regex tester lets you write a regular expression and instantly see which parts of a sample text it matches. It's invaluable for crafting validation rules, search patterns, and string-extraction logic before pasting them into your codebase." data-zh="正则测试工具让你输入正则表达式后立即在示例文本中查看匹配位置，是验证规则、搜索模式与字符串提取逻辑的必备神器。"></p>
+
+    <h3 data-en="How to use" data-zh="使用方法"></h3>
+    <ul>
+      <li data-en="Type your regex into the pattern field (no slashes needed)" data-zh="在 pattern 输入框中输入正则（无需写斜杠）"></li>
+      <li data-en="Toggle flags: g (global), i (case-insensitive), m (multiline), s, u" data-zh="切换标志位：g 全局、i 忽略大小写、m 多行、s、u"></li>
+      <li data-en="Paste test text into the lower box. Matches highlight live." data-zh="将测试文本粘贴到下方面板，匹配结果实时高亮"></li>
+      <li data-en="Inspect groups in the Match details panel" data-zh="在「匹配详情」中查看捕获组"></li>
+    </ul>
+
+    <h3 data-en="Examples" data-zh="示例"></h3>
+    <ul>
+      <li><code>\b\w+@\w+\.\w+\b</code> — <span data-en="email addresses" data-zh="邮箱地址"></span></li>
+      <li><code>https?://[^\s]+</code> — URLs</li>
+      <li><code>\d{4}-\d{2}-\d{2}</code> — <span data-en="ISO dates" data-zh="ISO 日期"></span></li>
+      <li><code>#[0-9a-fA-F]{3,6}</code> — <span data-en="hex color codes" data-zh="十六进制颜色"></span></li>
+    </ul>
+
+    <h3 data-en="Embed this tool" data-zh="嵌入此工具"></h3>
+    <p data-en="Copy this iframe to embed:" data-zh="复制以下 iframe 即可嵌入："></p>
+    <div class="embed-block">
+      &lt;iframe src="https://tools.psyverse.fun/regex-tester" width="100%" height="700" frameborder="0"&gt;&lt;/iframe&gt;
+      <button class="copy-mini" data-copy='<iframe src="https://tools.psyverse.fun/regex-tester" width="100%" height="700" frameborder="0"></iframe>'><span data-en="Copy" data-zh="复制"></span></button>
+    </div>
+
+    <h2 data-en="FAQ" data-zh="常见问题"></h2>
+    <div class="faq-item"><div class="faq-q" data-en="Which regex flavor is supported?" data-zh="支持哪种正则方言？"></div><div class="faq-a" data-en="JavaScript / ECMAScript regex (the same flavor used in browsers and Node.js). Some patterns from PCRE may need adjusting." data-zh="JavaScript / ECMAScript 正则（与浏览器和 Node.js 一致）。部分 PCRE 写法可能需要调整。"></div></div>
+    <div class="faq-item"><div class="faq-q" data-en="Why isn't my regex matching?" data-zh="为什么正则匹配不到？"></div><div class="faq-a" data-en="Common causes: missing g flag for multiple matches, special characters not escaped, or the pattern requires exactly the format you provided." data-zh="常见原因：未加 g 标志只匹配第一个、特殊字符未转义、或字符串与你预期的格式不一致。"></div></div>
+    <div class="faq-item"><div class="faq-q" data-en="Can I use named groups?" data-zh="支持命名捕获组吗？"></div><div class="faq-a" data-en="Yes. Named groups like (?&lt;year&gt;\\d{4}) work and appear in the Match details panel." data-zh="支持。如 (?&lt;year&gt;\\d{4}) 这样的命名组会显示在「匹配详情」面板中。"></div></div>
+  </section>
+</main>
+
+<div class="modal-bg" id="share-modal" data-action="close-modal">
+  <div class="modal" onclick="event.stopPropagation()">
+    <h3 data-en="Share this link" data-zh="分享链接"></h3>
+    <div class="modal-link"></div>
+    <div class="modal-share-row">
+      <a class="action-btn" target="_blank" data-share-x>X / Twitter</a>
+      <a class="action-btn" target="_blank" data-share-fb>Facebook</a>
+      <a class="action-btn" target="_blank" data-share-li>LinkedIn</a>
+      <button class="action-btn primary" data-share-copy data-copy="target"><span data-en="Copy link" data-zh="复制链接"></span></button>
+    </div>
+  </div>
+</div>
+
+<script src="/shared.js"></script>
+<script>
+const $ = s => document.querySelector(s);
+const pattern = $('#pattern'), flagsInput = $('#flags'), text = $('#text');
+const result = $('#result'), groupsEl = $('#groups'), info = $('#info');
+
+function escapeHtml(s) {
+  return s.replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+
+function syncFlags() {
+  document.querySelectorAll('[data-flag]').forEach(cb => {
+    if (cb.checked && !flagsInput.value.includes(cb.dataset.flag)) flagsInput.value += cb.dataset.flag;
+    if (!cb.checked) flagsInput.value = flagsInput.value.replace(cb.dataset.flag, '');
+  });
+}
+
+function syncCheckboxes() {
+  document.querySelectorAll('[data-flag]').forEach(cb => {
+    cb.checked = flagsInput.value.includes(cb.dataset.flag);
+  });
+}
+
+function run() {
+  const p = pattern.value, f = flagsInput.value, src = text.value;
+  if (!p) { result.innerHTML = '<span class="empty">Enter a pattern.</span>'; groupsEl.textContent = ''; info.innerHTML = ''; return; }
+  let re;
+  try { re = new RegExp(p, f); }
+  catch (e) {
+    result.innerHTML = '<span style="color:var(--danger);">✗ ' + escapeHtml(e.message) + '</span>';
+    info.innerHTML = '<b style="color:var(--danger);">Invalid regex</b>';
+    groupsEl.textContent = '';
+    return;
+  }
+  let html = '', last = 0, count = 0, groups = [];
+  const safe = src + '';
+  if (f.includes('g')) {
+    let m;
+    while ((m = re.exec(safe)) !== null) {
+      if (m.index === re.lastIndex) re.lastIndex++;
+      html += escapeHtml(safe.slice(last, m.index)) + '<span class="match">' + escapeHtml(m[0]) + '</span>';
+      last = m.index + m[0].length;
+      count++;
+      groups.push(m);
+      if (count > 1000) break;
+    }
+    html += escapeHtml(safe.slice(last));
+  } else {
+    const m = re.exec(safe);
+    if (m) {
+      html = escapeHtml(safe.slice(0, m.index)) + '<span class="match">' + escapeHtml(m[0]) + '</span>' + escapeHtml(safe.slice(m.index + m[0].length));
+      count = 1;
+      groups.push(m);
+    } else { html = escapeHtml(safe); }
+  }
+  result.innerHTML = html || '<span class="empty">No text.</span>';
+  info.innerHTML = `<span><b>${count}</b> match${count===1?'':'es'}</span><span>flags: <b>${f||'(none)'}</b></span><span>pattern length: <b>${p.length}</b></span>`;
+  groupsEl.textContent = groups.slice(0, 50).map((m, i) =>
+    `Match ${i+1}: "${m[0]}" @ ${m.index}` + (m.length > 1 ? '\n' + m.slice(1).map((g,j)=>`  Group ${j+1}: ${JSON.stringify(g)}`).join('\n') : '') +
+    (m.groups ? '\n  Named: ' + JSON.stringify(m.groups) : '')
+  ).join('\n\n') || '(no matches)';
+  TH.saveInput('regex-tester', JSON.stringify({ p, f, t: src }));
+}
+
+document.querySelectorAll('[data-flag]').forEach(cb => cb.addEventListener('change', () => { syncFlags(); run(); }));
+flagsInput.addEventListener('input', () => { syncCheckboxes(); run(); });
+[pattern, text].forEach(el => el.addEventListener('input', run));
+
+$('#btn-sample').onclick = () => {
+  pattern.value = '\\b\\w+@\\w+\\.\\w+\\b';
+  flagsInput.value = 'g'; syncCheckboxes();
+  text.value = 'Contact us at hello@psyverse.fun or support@example.com — we reply within 24h. Old: legacy@old.org';
+  run();
+};
+$('#btn-clear').onclick = () => { pattern.value = ''; text.value = ''; result.innerHTML = ''; groupsEl.textContent = ''; info.innerHTML = ''; };
+
+const state = TH.parseStateFromHash();
+if (state) { pattern.value = state.p || ''; flagsInput.value = state.f || 'g'; text.value = state.t || ''; syncCheckboxes(); run(); }
+else { try { const s = JSON.parse(TH.loadInput('regex-tester') || '{}'); if (s.p) { pattern.value = s.p; flagsInput.value = s.f; text.value = s.t || ''; syncCheckboxes(); run(); } } catch {} }
+
+document.querySelector('[data-action="open-share"]').addEventListener('click', e => {
+  e.target.closest('[data-action]').dataset.url = TH.shareableURL({ p: pattern.value, f: flagsInput.value, t: text.value });
+});
+</script>
+</body>
+</html>
