@@ -32,6 +32,14 @@ const TH = {
     const btn = document.querySelector('[data-action="toggle-lang"]');
     if (btn) btn.textContent = lang === 'en' ? '中文' : 'EN';
     document.documentElement.lang = lang === 'zh' ? 'zh-CN' : 'en';
+    document.querySelectorAll('[data-en], [data-zh]').forEach(el => {
+      if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') return;
+      const txt = lang === 'zh' ? el.getAttribute('data-zh') : el.getAttribute('data-en');
+      if (txt != null) el.innerHTML = txt;
+    });
+    document.querySelectorAll('input[data-en-placeholder]').forEach(el => {
+      el.placeholder = lang === 'zh' ? el.dataset.zhPlaceholder : el.dataset.enPlaceholder;
+    });
   },
 
   toggleLang() {
